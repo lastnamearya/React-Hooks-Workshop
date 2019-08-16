@@ -8,8 +8,16 @@ const EMOTINOS = {
 
 function LikeDislike() {
     const [emotion, setEmotion] = React.useState(0);
+    const [count, clickCount] = React.useState(0);
 
-    const changeEmotion = emotion => setEmotion(emotion);
+    React.useEffect(() => {
+        document.title = `${EMOTINOS[emotion]} and clicked ${count}`;
+    }, [emotion, count]);
+
+    const changeEmotion = emotion => {
+        setEmotion(emotion);
+        clickCount(count + 1);
+    }
 
     return (
         <div>
