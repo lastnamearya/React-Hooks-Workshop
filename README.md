@@ -1,1 +1,1 @@
-# workshop-react-hooks
+# React Hooks Workshop 
