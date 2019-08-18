@@ -3,38 +3,29 @@ import Header from './Header';
 import Filter from './components/Filter'; // we can create a directory strucure based on components as well
 import Trending from './Trending';
 
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            trendingRepos: [],
-            loading: true
-        }
-    }
-    handleFilterChange = (data) => {
-        this.setState({
-            trendingRepos: data,
-            loading: false
-        });
+
+function App(props) {
+    const [loading, setLoading] = React.useState(false);
+    const [trendingRepos, setTrendingRepos] = React.useState([]);
+
+    const handleFilterChange = (data) => {
+        setTrendingRepos(data);
+        setLoading(false);
     }
 
-    showLoader = () => {
-        this.setState({
-            loading: true
-        });
+    const showLoader = () => {
+        setLoading(true);
     }
 
-    render() {
-        return (
-            <Fragment>
-                <Header />
-                <main>
-                    <Filter handleFilterChange={this.handleFilterChange} showLoader={this.showLoader}/>
-                    <Trending trendingRepos={this.state.trendingRepos} loading={this.state.loading}/>
-                </main>
-            </Fragment>
-        );
-    }
-};
+    return (
+        <Fragment>
+            <Header />
+            <main>
+                <Filter handleFilterChange={handleFilterChange} showLoader={showLoader} />
+                <Trending trendingRepos={trendingRepos} loading={loading} />
+            </main>
+        </Fragment>
+    );
+}
 
 export default App;
